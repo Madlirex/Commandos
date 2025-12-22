@@ -81,7 +81,7 @@ public static class BasicCommands
         }
 
         int[] counter = new int[2];
-        
+
         try
         {
             string[] dirs = Directory.GetDirectories(directory);
@@ -92,7 +92,7 @@ public static class BasicCommands
             {
                 return counter;
             }
-        
+
             foreach (string dir in dirs)
             {
                 int[] counts = ListDir(dir, deep, maxDepth, depth + 1)!;
@@ -104,6 +104,10 @@ public static class BasicCommands
         {
             Debug.Warning($"Access denied for {directory}.");
             counter[1] += 1;
+        }
+        catch (DirectoryNotFoundException)
+        {
+            Debug.Error($"No such directory: {directory}.");
         }
         
         if (depth == 0)
