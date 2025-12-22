@@ -1,0 +1,14 @@
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\Commandos.exe
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\Commandos.deps.json
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\Commandos.runtimeconfig.json
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\Commandos.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\Commandos.pdb
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Release\net9.0\Commandos.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Release\net9.0\Commandos.AssemblyInfoInputs.cache
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Release\net9.0\Commandos.AssemblyInfo.cs
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Release\net9.0\Commandos.csproj.CoreCompileInputs.cache
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Release\net9.0\Commandos.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Release\net9.0\refint\Commandos.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Release\net9.0\Commandos.pdb
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Release\net9.0\Commandos.genruntimeconfig.cache
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Release\net9.0\ref\Commandos.dll

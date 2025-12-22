@@ -1,0 +1,2 @@
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\publish\Commandos.pdb
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\publish\Commandos.exe
