@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Commandos</name>
+    </assembly>
+    <members>
+        <member name="M:Commandos.BasicCommands.Help(System.String)">
+            <summary>
+            Without a parameter lists all commands.
+            With a parameter lists description of the command provided from the XML description of the method.
+            </summary>
+            <param name="command">Command to get description of. Leave empty for list of commands.</param>
+        </member>
+        <member name="M:Commandos.BasicCommands.Quit">
+            <summary>
+            Quits
+            </summary>
+        </member>
+    </members>
+</doc>

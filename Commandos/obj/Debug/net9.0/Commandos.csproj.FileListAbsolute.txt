@@ -14,3 +14,17 @@ C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Debug\net9.0\Commandos.genrun
 C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Debug\net9.0\ref\Commandos.dll
 C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\Commandos.xml
 C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Debug\net9.0\Commandos.xml
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Debug\net9.0\Commandos.sourcelink.json
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\System.Drawing.Common.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\System.Private.Windows.Core.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\System.Private.Windows.GdiPlus.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\runtimes\win\lib\net9.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Debug\net9.0\Commandos.csproj.AssemblyReference.cache
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Debug\net9.0\Commandos.csproj.Up2Date
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\NAudio.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\NAudio.Asio.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\NAudio.Core.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\NAudio.Midi.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\NAudio.Wasapi.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\NAudio.WinMM.dll

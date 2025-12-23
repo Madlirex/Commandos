@@ -95,15 +95,15 @@ static class Debug
         return Console.ReadLine();
     }
 
-    public static bool AskTimeDanger()
+    public static bool AskSmallRisk(string msg = "This action may take a while. Are you sure you want to proceed? (Y/N)")
     {
-        Warning("This action may take a while. Are you sure you want to proceed? (Y/N)");
+        Warning(msg);
         return ReadLine()!.ToLower() == "y";
     }
 
-    public static bool AskDanger()
+    public static bool AskDanger(string msg = "This action may be dangerous. Are you sure you want to proceed? (Y/N)")
     {
-        WritePlainLine("This action may be dangerous. Are you sure you want to proceed? (Y/N)", ConsoleColor.DarkRed, "[ CAUTION ]");
+        WritePlainLine(msg, ConsoleColor.DarkRed, "[ CAUTION ]");
         return ReadLine()!.ToLower() == "y";
     }
 }

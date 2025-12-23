@@ -53,7 +53,7 @@ public static class BasicCommands
             {
                 if (_askDangerCommands && count >= _dangerRepetitionLimit)
                 {
-                    if (!Debug.AskTimeDanger()) return;
+                    if (!Debug.AskSmallRisk()) return;
                 }
                 for (; count > 0; count--)
                 {
@@ -159,5 +159,11 @@ public static class BasicCommands
 
                 break;
         }
+    }
+    
+    [Command("clear")]
+    public static void Clear()
+    {
+        Console.Clear();
     }
 }

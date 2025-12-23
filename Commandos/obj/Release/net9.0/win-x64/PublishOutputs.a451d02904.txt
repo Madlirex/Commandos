@@ -1,2 +1,3 @@
 C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\Commandos.pdb
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\Commandos.xml
 C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\Commandos.exe

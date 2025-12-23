@@ -5,15 +5,22 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>0.0.1 Beta</Version>
-        <AssemblyVersion>0.0.1</AssemblyVersion>
+        <Version>0.0.2</Version>
+        <AssemblyVersion>0.0.2</AssemblyVersion>
         <Title>Commandos</Title>
         <Authors>Madlirex Studios</Authors>
         <Company>Madlirex Studios</Company>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <FileVersion>0.0.2</FileVersion>
     </PropertyGroup>
     
     <PropertyGroup>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="NAudio" Version="2.2.1" />
+      <PackageReference Include="System.Drawing.Common" Version="10.0.1" />
+    </ItemGroup>
 
 </Project>

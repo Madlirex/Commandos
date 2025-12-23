@@ -197,3 +197,17 @@ C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\mscord
 C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\mscorrc.dll
 C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\msquic.dll
 C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Release\net9.0\win-x64\Commandos.csproj.Up2Date
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\Commandos.xml
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\Microsoft.Win32.SystemEvents.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\System.Drawing.Common.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\System.Private.Windows.Core.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\System.Private.Windows.GdiPlus.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Release\net9.0\win-x64\Commandos.csproj.AssemblyReference.cache
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Release\net9.0\win-x64\Commandos.sourcelink.json
+C:\Users\simon\Projekty\C#\Commandos\Commandos\obj\Release\net9.0\win-x64\Commandos.xml
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\NAudio.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\NAudio.Asio.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\NAudio.Core.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\NAudio.Midi.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\NAudio.Wasapi.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\NAudio.WinMM.dll
