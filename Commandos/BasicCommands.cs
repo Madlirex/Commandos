@@ -1,4 +1,6 @@
+using System.Globalization;
 using System.Reflection;
+using System.Text;
 
 namespace Commandos;
 
@@ -12,7 +14,6 @@ public static class BasicCommands
     /// Without a parameter lists all commands.
     /// With a parameter lists description of the command provided from the XML description of the method.
     /// </summary>
-    /// <param name="command">Command to get description of. Leave empty for list of commands.</param>
     [Command("help", "commands")]
     public static void Help(string command = "")
     {
@@ -44,34 +45,50 @@ public static class BasicCommands
         Program.Running = false;
     }
 
+    
+    /// <summary>
+    /// Repeats given string arguments.
+    /// Each argument will be in a new line. To write a string with spaces use "".
+    /// If the first argument is a valid integer number, the arguments after will be repeated that many times.
+    /// </summary>
     [Command("echo")]
-    public static void Echo(string[] args)
+    public static string[] Echo(string[] args)
     {
         if (args.Length != 0)
         {
-            if (int.TryParse(args[0], out var count))
+            if (int.TryParse(args[0], out int count))
             {
                 if (_askDangerCommands && count >= _dangerRepetitionLimit)
                 {
-                    if (!Debug.AskSmallRisk()) return;
+                    if (!Debug.AskSmallRisk()) return [];
                 }
                 for (; count > 0; count--)
                 {
                     Debug.WriteLines(args[1..]);
                 }
 
-                return;
+                return args;
             }
         }
         Debug.WriteLines(args);
+        return args;
     }
 
+    
+    /// <summary>
+    /// Adds together all numbers provided.
+    /// They can be integer or float, positive or negative. Use commas for float numbers.
+    /// </summary>
     [Command("add", "sum")]
-    public static void Add(int[] nums)
+    public static float Add(float[] nums)
     {
-        Debug.WriteLine((nums.Sum()).ToString());
+        Debug.WriteLine((nums.Sum()).ToString(CultureInfo.CurrentCulture));
+        return nums.Sum();
     }
-
+    
+    /// <summary>
+    /// Lists all subdirectories of provided directory.
+    /// </summary>
     [Command("listdir")]
     public static int[]? ListDir(string directory, bool deep = false, int maxDepth = -1, int depth = 0)
     {
@@ -161,9 +178,42 @@ public static class BasicCommands
         }
     }
     
+    
+    /// <summary>
+    /// Clears the console.
+    /// </summary>
     [Command("clear")]
     public static void Clear()
     {
         Console.Clear();
+    }
+
+    [Command("sequence", "seq")]
+    public static void SequenceOfCommands(string[] args)
+    {
+        List<StringBuilder> commands = [new()];
+        foreach (string s in args)
+        {
+            if (s.Contains(';'))
+            {
+                string[] split = s.Split(';');
+                commands[^1].Append(split[0]);
+                foreach (string sub in split[1..])
+                {
+                    commands.Add(new StringBuilder(sub));
+                }
+            }
+            else
+            {
+                commands[^1].Append(s + " ");
+            }
+        }
+        if (commands[^1].Length > 0) commands[^1].Remove(commands[^1].Length - 1, 1);
+
+        foreach (StringBuilder sb in commands)
+        {
+            CommandRegistry.TryExecuteCommand(sb.ToString(), out object? var);
+            Debug.Info(var?.ToString());
+        }
     }
 }

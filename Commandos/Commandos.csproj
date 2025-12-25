@@ -22,5 +22,9 @@
       <PackageReference Include="NAudio" Version="2.2.1" />
       <PackageReference Include="System.Drawing.Common" Version="10.0.1" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Commands\" />
+    </ItemGroup>
 
 </Project>

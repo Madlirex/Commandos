@@ -9,11 +9,33 @@
             Without a parameter lists all commands.
             With a parameter lists description of the command provided from the XML description of the method.
             </summary>
-            <param name="command">Command to get description of. Leave empty for list of commands.</param>
         </member>
         <member name="M:Commandos.BasicCommands.Quit">
             <summary>
             Quits
+            </summary>
+        </member>
+        <member name="M:Commandos.BasicCommands.Echo(System.String[])">
+            <summary>
+            Repeats given string arguments.
+            Each argument will be in a new line. To write a string with spaces use "".
+            If the first argument is a valid integer number, the arguments after will be repeated that many times.
+            </summary>
+        </member>
+        <member name="M:Commandos.BasicCommands.Add(System.Single[])">
+            <summary>
+            Adds together all numbers provided.
+            They can be integer or float, positive or negative. Use commas for float numbers.
+            </summary>
+        </member>
+        <member name="M:Commandos.BasicCommands.ListDir(System.String,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Lists all subdirectories of provided directory.
+            </summary>
+        </member>
+        <member name="M:Commandos.BasicCommands.Clear">
+            <summary>
+            Clears the console.
             </summary>
         </member>
     </members>

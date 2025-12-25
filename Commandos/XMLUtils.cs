@@ -16,8 +16,8 @@ static class XmlUtils
 
         if (member == null) return "No description provided.";
 
-        var summary = member.Element("summary")?.Value;
-        return NormalizeXmlText(summary!);
+        string summary = member.Element("summary")?.Value ?? "";
+        return NormalizeXmlText(summary);
     }
     
     private static string GetMemberName(MethodInfo method)
