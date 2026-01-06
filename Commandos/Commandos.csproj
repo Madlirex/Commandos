@@ -5,13 +5,13 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Version>0.0.2</Version>
-        <AssemblyVersion>0.0.2</AssemblyVersion>
+        <Version>0.0.3</Version>
+        <AssemblyVersion>0.0.3</AssemblyVersion>
         <Title>Commandos</Title>
         <Authors>Madlirex Studios</Authors>
         <Company>Madlirex Studios</Company>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <FileVersion>0.0.2</FileVersion>
+        <FileVersion>0.0.3</FileVersion>
     </PropertyGroup>
     
     <PropertyGroup>
@@ -24,7 +24,9 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Folder Include="Commands\" />
+      <None Update="assets\Ratatouille.mp4">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

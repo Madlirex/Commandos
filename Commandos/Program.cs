@@ -9,7 +9,8 @@ static class Program
     public static string? ApplicationVersion;
     public static string? DevStudio;
     public static bool Running = true;
-    
+
+    #region OnlyGodKnows
     [DllImport("kernel32.dll")]
     static extern IntPtr GetStdHandle(int nStdHandle);
 
@@ -18,6 +19,7 @@ static class Program
 
     [DllImport("kernel32.dll")]
     static extern bool SetConsoleMode(IntPtr hConsoleHandle, uint dwMode);
+    #endregion
     
     static void Main(string[] args)
     {
@@ -33,7 +35,8 @@ static class Program
         {
             string? input = Debug.ReadLine();
             if (input == null)  continue;
-            CommandRegistry.TryExecuteCommand(input, out _);
+            CommandRegistry.TryExecuteCommand(input, out object? var);
+            if (var != null) Debug.Write(var.ToString());
         }
     }
 

@@ -211,3 +211,4 @@ C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\NAudio
 C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\NAudio.Midi.dll
 C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\NAudio.Wasapi.dll
 C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\NAudio.WinMM.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Release\net9.0\win-x64\assets\Ratatouille.mp4

@@ -7,7 +7,7 @@
   "targets": {
     ".NETCoreApp,Version=v9.0": {},
     ".NETCoreApp,Version=v9.0/win-x64": {
-      "Commandos/0.0.2": {
+      "Commandos/0.0.3": {
         "dependencies": {
           "Microsoft.NET.ILLink.Tasks": "9.0.10",
           "NAudio": "2.2.1",
@@ -118,7 +118,7 @@
     }
   },
   "libraries": {
-    "Commandos/0.0.2": {
+    "Commandos/0.0.3": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

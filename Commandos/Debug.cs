@@ -1,18 +1,13 @@
 using System.Text;
+using Commandos.Commands;
 
 namespace Commandos;
 
 static class Debug
 {
-    public static ConsoleColor ErrorColor = ConsoleColor.DarkRed;
-    public static ConsoleColor WarningColor = ConsoleColor.DarkYellow;
-    public static ConsoleColor InfoColor = ConsoleColor.DarkGray;
-    public static ConsoleColor LineColor = ConsoleColor.White;
-    public static ConsoleColor UserColor = ConsoleColor.Blue;
-
     public static int MinMessagePrefixPadding = 12;
 
-    public static string IndentString(string msg)
+    public static string IndentString(string msg, bool fromLeft = false)
     {
         StringBuilder builder = new StringBuilder();
         if (MinMessagePrefixPadding > msg.Length)
@@ -20,32 +15,32 @@ static class Debug
             builder.Append(' ', MinMessagePrefixPadding - msg.Length);
         }
 
-        return msg + builder;
+        return fromLeft ? builder + msg : msg + builder;
     }
     
     public static void Error(string? msg)
     {
-        WritePlainLines($"{msg}".Split("\n"), ErrorColor, "[ ERROR ]");
+        WritePlainLines($"{msg}".Split("\n"), Settings.ConsoleColors["error"], "[ ERROR ]");
     }
 
     public static void Warning(string? msg)
     {
-        WritePlainLines($"{msg}".Split("\n"), WarningColor, "[ WARN ]");
+        WritePlainLines($"{msg}".Split("\n"), Settings.ConsoleColors["warn"], "[ WARN ]");
     }
 
     public static void Info(string? msg)
     {
-        WritePlainLines($"{msg}".Split("\n"), InfoColor, "[ INFO ]");
+        WritePlainLines($"{msg}".Split("\n"), Settings.ConsoleColors["info"], "[ INFO ]");
     }
 
     public static void WriteLine(string? msg)
     {
-        WritePlainLines($"{msg}".Split("\n"), LineColor, "[ SYSTEM ]");
+        WritePlainLines($"{msg}".Split("\n"), Settings.ConsoleColors["system"], "[ SYSTEM ]");
     }
     
     public static void WritePlainLine(string? msg, ConsoleColor? color = null, string? prefix = null)
     {
-        Console.ForegroundColor = color ?? LineColor;
+        Console.ForegroundColor = color ?? Settings.ConsoleColors["system"];
         prefix = prefix == null ? "" : IndentString(prefix);
         Console.WriteLine($"{prefix}{msg}");
     }
@@ -54,7 +49,7 @@ static class Debug
     {
         if (msg.Length == 0) return;
 
-        Console.ForegroundColor = color ?? LineColor;
+        Console.ForegroundColor = color ?? Settings.ConsoleColors["system"];
         
         Debug.WriteLine(msg[0]);
         
@@ -70,9 +65,9 @@ static class Debug
     {
         if (msg.Length == 0) return;
 
-        Console.ForegroundColor = color ?? LineColor;
+        Console.ForegroundColor = color ?? Settings.ConsoleColors["system"];
         prefix = prefix == null ? "" : IndentString(prefix);
-        Debug.WritePlainLine(msg[0], color, prefix);
+        WritePlainLine(msg[0], color, prefix);
         
         if (msg.Length == 1) return;
         
@@ -84,13 +79,13 @@ static class Debug
 
     public static void Write(string? msg)
     {
-        Console.ForegroundColor = LineColor;
+        Console.ForegroundColor = Settings.ConsoleColors["system"];
         Console.Write(msg);
     }
 
     public static string? ReadLine(string msg = "[ USER ] ")
     {
-        Console.ForegroundColor = UserColor;
+        Console.ForegroundColor = Settings.ConsoleColors["user"];
         Console.Write(IndentString(msg));
         return Console.ReadLine();
     }
@@ -105,5 +100,20 @@ static class Debug
     {
         WritePlainLine(msg, ConsoleColor.DarkRed, "[ CAUTION ]");
         return ReadLine()!.ToLower() == "y";
+    }
+
+    public static void WaitSeconds(int seconds)
+    {
+        WaitSeconds((float)seconds);
+    }
+
+    public static void WaitSeconds(float seconds)
+    {
+        Thread.Sleep((int)(seconds * 1000));
+    }
+
+    public static void Wait(int milliseconds)
+    {
+        WaitSeconds(milliseconds * 1000);
     }
 }

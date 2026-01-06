@@ -1,8 +1,9 @@
 using System.Reflection;
+using System.Text;
 using System.Xml.Linq;
+using Microsoft.VisualBasic;
 
 namespace Commandos;
-
 
 static class XmlUtils
 {
@@ -10,34 +11,133 @@ static class XmlUtils
 
     public static string GetSummary(MethodInfo method)
     {
-        string memberName = GetMemberName(method);
-
-        var member = Doc.Descendants("member").FirstOrDefault(m => m.Attribute("name")?.Value == memberName);
-
+        var member = GetMember(method);
         if (member == null) return "No description provided.";
 
-        string summary = member.Element("summary")?.Value ?? "";
-        return NormalizeXmlText(summary);
+        return NormalizeXmlText(member.Element("summary")?.Value ?? "");
     }
-    
+
+    public static IReadOnlyList<MethodParameter> GetParameters(MethodInfo method)
+    {
+        var member = GetMember(method);
+        if (member == null) return Array.Empty<MethodParameter>();
+
+        var xmlParams = member.Elements("param")
+            .ToDictionary(
+                p => p.Attribute("name")!.Value,
+                p => NormalizeXmlText(p.Value)
+            );
+
+        return method.GetParameters()
+            .Select(p => new MethodParameter(
+                Type: GetFriendlyType(p.ParameterType),
+                Name: p.Name!,
+                Description: xmlParams.GetValueOrDefault(p.Name!, "")
+            ))
+            .ToList();
+    }
+
+    private static XElement? GetMember(MethodInfo method)
+    {
+        string memberName = GetMemberName(method);
+
+        return Doc.Descendants("member")
+            .FirstOrDefault(m => m.Attribute("name")?.Value == memberName);
+    }
+
     private static string GetMemberName(MethodInfo method)
     {
-        var typeName = method.DeclaringType!.FullName;
+        var typeName = method.DeclaringType!.FullName!;
         var parameters = method.GetParameters();
 
-        if (parameters.Length == 0) return $"M:{typeName}.{method.Name}";
+        if (parameters.Length == 0)
+            return $"M:{typeName}.{method.Name}";
 
-        string paramList = string.Join(",", parameters.Select(p => p.ParameterType.FullName));
+        string paramList = string.Join(
+            ",",
+            parameters.Select(p => p.ParameterType.FullName)
+        );
 
         return $"M:{typeName}.{method.Name}({paramList})";
     }
-    
+
+    private static readonly Dictionary<Type, string> TypeAliases = new()
+    {
+        { typeof(void), "void" },
+        { typeof(bool), "bool" },
+        { typeof(byte), "byte" },
+        { typeof(short), "short" },
+        { typeof(int), "int" },
+        { typeof(long), "long" },
+        { typeof(float), "float" },
+        { typeof(double), "double" },
+        { typeof(decimal), "decimal" },
+        { typeof(char), "char" },
+        { typeof(string), "string" },
+        { typeof(object), "object" }
+    };
+
+    private static string GetFriendlyType(Type type)
+    {
+        if (Nullable.GetUnderlyingType(type) is { } underlying)
+        {
+            return $"{GetFriendlyType(underlying)}?";
+        }
+        
+        if (TypeAliases.TryGetValue(type, out var alias))
+        {
+            return alias;
+        }
+        
+        if (type.IsArray)
+        {
+            return $"{GetFriendlyType(type.GetElementType()!)}[]";
+        }
+        
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+        {
+            return $"{GetFriendlyType(type.GetGenericArguments()[0])}[]";
+        }
+        
+        if (type.IsGenericType)
+        {
+            var name = type.Name[..type.Name.IndexOf('`')];
+            var args = string.Join(
+                ", ",
+                type.GetGenericArguments().Select(GetFriendlyType)
+            );
+            return $"{name}<{args}>";
+        }
+
+        return type.Name;
+    }
+
+
     private static string NormalizeXmlText(string text)
     {
-        if (string.IsNullOrWhiteSpace(text)) return string.Empty;
+        if (string.IsNullOrWhiteSpace(text))
+            return string.Empty;
+
+        return string.Join(
+            "\n",
+            text.Split('\n')
+                .Select(line => line.Trim())
+                .Where(line => line.Length > 0)
+        );
+    }
+
+    public static string ParametersToString(IEnumerable<MethodParameter> parameters)
+    {
+        StringBuilder result = new StringBuilder();
+
+        foreach (MethodParameter parameter in parameters)
+        {
+            result.Append($"\n({parameter.Type})<{parameter.Name}>" +
+                          (string.IsNullOrWhiteSpace(parameter.Description) ? "" : $" - {parameter.Description}"));
+        }
         
-        var lines = text.Split('\n').Select(line => line.Trim()).Where(line => line.Length > 0);
-        
-        return string.Join("\n", lines);
+        return result.ToString();
     }
 }
+
+public record MethodParameter(string Type, string Name, string Description);

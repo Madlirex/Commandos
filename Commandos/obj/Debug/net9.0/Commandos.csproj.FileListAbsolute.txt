@@ -28,3 +28,4 @@ C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\NAudio.Core.dll
 C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\NAudio.Midi.dll
 C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\NAudio.Wasapi.dll
 C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\NAudio.WinMM.dll
+C:\Users\simon\Projekty\C#\Commandos\Commandos\bin\Debug\net9.0\assets\Ratatouille.mp4
