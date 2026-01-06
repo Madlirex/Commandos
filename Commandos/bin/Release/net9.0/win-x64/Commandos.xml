@@ -9,6 +9,7 @@
             Without a parameter lists all commands.
             With a parameter lists description of the command provided from the XML description of the method.
             </summary>
+            <param name="command">Command to get information about.</param>
         </member>
         <member name="M:Commandos.Commands.BasicCommands.Quit">
             <summary>
@@ -36,6 +37,11 @@
         <member name="M:Commandos.Commands.BasicCommands.Clear">
             <summary>
             Clears the console.
+            </summary>
+        </member>
+        <member name="M:Commandos.Commands.BasicCommands.Wait(System.Single)">
+            <summary>
+            Waits for x seconds.
             </summary>
         </member>
         <member name="F:Commandos.Commands.Settings.ConsoleColors">
