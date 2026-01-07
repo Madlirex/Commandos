@@ -12,7 +12,7 @@ class CommandAttribute(string name, params string[] aliases) : Attribute
 
 static class CommandRegistry
 {
-    public static Dictionary<string, MethodInfo> Commands = new Dictionary<string, MethodInfo>();
+    public static Dictionary<string, MethodInfo> Commands = new();
 
     public static void RegisterCommands()
     {

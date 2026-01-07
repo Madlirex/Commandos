@@ -1,5 +1,8 @@
 namespace Commandos.Commands;
 
+/// <summary>
+/// Commands that change the behavior of the console.
+/// </summary>
 public static class Settings
 {
     /// <summary>
@@ -15,6 +18,11 @@ public static class Settings
         {"background", ConsoleColor.Black}
     };
     
+    /// <summary>
+    /// Sets multiple settings of the console to the desired value.
+    /// Use: color [target] [color] to change the color of the target (info/user/system/warn/error/background) to a valid ConsoleColor. (red/darkred/blue...)
+    /// </summary>
+    /// <param name="args">First is the setting to change, next are parameters unique to that setting.</param>
     [Command("settings", "options")]
     public static void SettingsCommand(string[] args)
     {

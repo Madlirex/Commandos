@@ -4,6 +4,11 @@
         <name>Commandos</name>
     </assembly>
     <members>
+        <member name="T:Commandos.Commands.BasicCommands">
+            <summary>
+            Commands for everyday usage. Very common and useful.
+            </summary>
+        </member>
         <member name="M:Commandos.Commands.BasicCommands.Help(System.String)">
             <summary>
             Without a parameter lists all commands.
@@ -28,11 +33,16 @@
             Adds together all numbers provided.
             They can be integer or float, positive or negative. Use commas for float numbers.
             </summary>
+            <param name="nums">Numbers to add together.</param>
         </member>
         <member name="M:Commandos.Commands.BasicCommands.ListDir(System.String,System.Boolean,System.Int32,System.Int32)">
             <summary>
-            Lists all subdirectories of provided directory.
+            Lists all subdirectories of provided root directory.
             </summary>
+            <param name="directory">Absolute path of root to list from.</param>
+            <param name="deep">Whether to list only top layer or go into nested directories.</param>
+            <param name="maxDepth">Maximum depth of nested directories to search in. Set to -1 for infinite. Only used if deep is true.</param>
+            <param name="depth">Current depth of recursion in searching nested directories.</param>
         </member>
         <member name="M:Commandos.Commands.BasicCommands.Clear">
             <summary>
@@ -44,10 +54,83 @@
             Waits for x seconds.
             </summary>
         </member>
+        <member name="T:Commandos.Commands.ImageCommands">
+            <summary>
+            Bunch of image display functions.
+            </summary>
+        </member>
+        <member name="M:Commandos.Commands.ImageCommands.ShowImage(System.String)">
+            <summary>
+            Draws an image to the console.
+            </summary>
+            <param name="path">Absolute path to the png or jpg file.</param>
+        </member>
+        <member name="M:Commandos.Commands.ImageCommands.PlayVideo(System.String,System.Int32)">
+            <summary>
+            Plays a video in the console using shit I don't understand quite well.
+            It's a lot of operations with bytes and pointers to make it faster (~12 FPS).
+            I highly recommend downscaling videos to 12 FPS and letting it play at original FPS.
+            WARNING: This command can be used only ONCE in a single application run due to internal architecture of consoles.
+            It does some weirdy stuff with the way console renders text, and you can't reenter the state again.
+            </summary>
+            <param name="path">Absolute path to the video file.</param>
+            <param name="fps">FPS you wish the video to play at. Set to -1 for automatic FPS recognition (original from the file).
+            Disclaimer: This changes how many frames are attempted to be rendered per second, not how many actually are. Make it bigger than original FPS, speed up video. Make it smaller than original FPS, slow down video. The console can't achieve rendering speeds above 12 FPS.</param>
+        </member>
+        <member name="T:Commandos.Commands.ProgrammingCommands">
+            <summary>
+            Commands for programming. Cool ik.
+            </summary>
+        </member>
+        <member name="M:Commandos.Commands.ProgrammingCommands.SaveSequence(System.String,System.String[])">
+            <summary>
+            Saves the provided sequence as the provided name.
+            </summary>
+            <param name="name">Name of sequence.</param>
+            <param name="args">Sequence to save. First argument (word) is ommited. Such as: save help seq(ommited) help.</param>
+        </member>
+        <member name="M:Commandos.Commands.ProgrammingCommands.ListSequences">
+            <summary>
+            Lists all saves sequences and their names.
+            </summary>
+        </member>
+        <member name="M:Commandos.Commands.ProgrammingCommands.ExecuteSequence(System.String)">
+            <summary>
+            Executes saved sequence by given sequence name.
+            </summary>
+            <param name="name">Name of saved sequence to execute.</param>
+        </member>
+        <member name="M:Commandos.Commands.ProgrammingCommands.SequenceOfCommands(System.String[])">
+            <summary>
+            Creates and runs a new sequence using given commands.
+            Separate commands with ; such as: seq help; wait 3; q
+            </summary>
+            <param name="args">Commands to execute in this sequence.</param>
+        </member>
+        <member name="M:Commandos.Commands.ProgrammingCommands.ArgumentCommand(System.String[])">
+            <summary>
+            Inputs value(s) that are returned by command(s) into the first command.
+            First argument is command to put values into, next are commands to get values from.
+            Separate commands with ; just like in sequences.
+            </summary>
+            <param name="args">First is command to input values to, second and next are command(s) to get values from.</param>
+        </member>
+        <member name="T:Commandos.Commands.Settings">
+            <summary>
+            Commands that change the behavior of the console.
+            </summary>
+        </member>
         <member name="F:Commandos.Commands.Settings.ConsoleColors">
             <summary>
             Colors for the console.
             </summary>
+        </member>
+        <member name="M:Commandos.Commands.Settings.SettingsCommand(System.String[])">
+            <summary>
+            Sets multiple settings of the console to the desired value.
+            Use: color [target] [color] to change the color of the target (info/user/system/warn/error/background) to a valid ConsoleColor. (red/darkred/blue...)
+            </summary>
+            <param name="args">First is the setting to change, next are parameters unique to that setting.</param>
         </member>
     </members>
 </doc>

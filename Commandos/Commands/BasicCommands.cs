@@ -3,6 +3,9 @@ using System.Reflection;
 
 namespace Commandos.Commands;
 
+/// <summary>
+/// Commands for everyday usage. Very common and useful.
+/// </summary>
 public static class BasicCommands
 {
     private static bool _askDangerCommands = true;
@@ -21,7 +24,9 @@ public static class BasicCommands
         {
             string[] prefixText =
                 ["Here is a full list of commands. To get information about a command run \"help <command>\"."];
-            Debug.WriteLines(prefixText.Concat(CommandRegistry.Commands.Keys.ToArray()).ToArray());
+            string[] commands = CommandRegistry.Commands.Keys.ToArray();
+            Array.Sort(commands, String.CompareOrdinal);
+            Debug.WriteLines(prefixText.Concat(commands).ToArray());
         }
         else
         {
@@ -29,9 +34,9 @@ public static class BasicCommands
             
             CommandAttribute attribute = CommandRegistry.Commands[command].GetCustomAttribute<CommandAttribute>()!;
             string[] prefix = [$"Description for command {attribute.Name}:"];
-            string usage = $"Usage: {XmlUtils.ParametersToString(XmlUtils.GetParameters(CommandRegistry.GetCommand(command)))}";
+            string usage = $"Usage: \n{XmlUtils.ParametersToString(XmlUtils.GetParameters(CommandRegistry.GetCommand(command)))}";
             string suffix = $"Aliases ({attribute.Aliases.Length}): {string.Join(", ", attribute.Aliases)}";
-            if (attribute.Aliases.Length == 0) suffix = $"Aliases (0): None";
+            if (attribute.Aliases.Length == 0) suffix = "Aliases (0): None";
             
             Debug.WriteLines(prefix.Concat(descriptionText).ToArray());
             Debug.WritePlainLines(usage.Split("\n"), prefix: "      >>");
@@ -42,7 +47,7 @@ public static class BasicCommands
     /// <summary>
     /// Quits
     /// </summary>
-    [Command("q", "exit", "quit")]
+    [Command("quit", "exit", "q")]
     public static void Quit()
     {
         Debug.Info("Fuck you.");
@@ -56,6 +61,7 @@ public static class BasicCommands
     /// Each argument will be in a new line. To write a string with spaces use "".
     /// If the first argument is a valid integer number, the arguments after will be repeated that many times.
     /// </summary>
+    /// <param name="args">Messages to display.</param>
     [Command("echo")]
     public static string[] Echo(string[] args)
     {
@@ -69,7 +75,7 @@ public static class BasicCommands
                 }
                 for (; count > 0; count--)
                 {
-                    return args[1..];
+                    Debug.WriteLines(args[1..]);
                 }
 
                 return args;
@@ -84,6 +90,7 @@ public static class BasicCommands
     /// Adds together all numbers provided.
     /// They can be integer or float, positive or negative. Use commas for float numbers.
     /// </summary>
+    /// <param name="nums">Numbers to add together.</param>
     [Command("add", "sum")]
     public static float Add(float[] nums)
     {
@@ -92,8 +99,12 @@ public static class BasicCommands
     }
     
     /// <summary>
-    /// Lists all subdirectories of provided directory.
+    /// Lists all subdirectories of provided root directory.
     /// </summary>
+    /// <param name="directory">Absolute path of root to list from.</param>
+    /// <param name="deep">Whether to list only top layer or go into nested directories.</param>
+    /// <param name="maxDepth">Maximum depth of nested directories to search in. Set to -1 for infinite. Only used if deep is true.</param>
+    /// <param name="depth">Current depth of recursion in searching nested directories.</param>
     [Command("listdir")]
     public static int[]? ListDir(string directory, bool deep = false, int maxDepth = -1, int depth = 0)
     {
@@ -152,6 +163,7 @@ public static class BasicCommands
     /// <summary>
     /// Waits for x seconds.
     /// </summary>
+    /// <param name="seconds">Amount of seconds to wait for.</param>
     [Command("wait", "sleep")]
     public static void Wait(float seconds)
     {

@@ -32,9 +32,11 @@ static class XmlUtils
             .Select(p => new MethodParameter(
                 Type: GetFriendlyType(p.ParameterType),
                 Name: p.Name!,
-                Description: xmlParams.GetValueOrDefault(p.Name!, "")
+                Description: xmlParams.GetValueOrDefault(p.Name!, ""),
+                DefaultValue: p.HasDefaultValue ? p.DefaultValue : null
             ))
             .ToList();
+
     }
 
     private static XElement? GetMember(MethodInfo method)
@@ -128,16 +130,38 @@ static class XmlUtils
 
     public static string ParametersToString(IEnumerable<MethodParameter> parameters)
     {
-        StringBuilder result = new StringBuilder();
+        var sb = new StringBuilder();
 
-        foreach (MethodParameter parameter in parameters)
+        foreach (var p in parameters)
         {
-            result.Append($"\n({parameter.Type})<{parameter.Name}>" +
-                          (string.IsNullOrWhiteSpace(parameter.Description) ? "" : $" - {parameter.Description}"));
+            sb.Append((p.DefaultValue != null ? "[Opt.] " : "") + $"({p.Type})<{p.Name}>");
+
+            if (p.DefaultValue != null)
+                sb.Append($" = {FormatDefaultValue(p.DefaultValue)}");
+
+            if (!string.IsNullOrWhiteSpace(p.Description))
+                sb.Append($" - {p.Description}");
+
+            sb.Append('\n');
         }
+
+        if (sb.Length > 0)
+            sb.Length--;
         
-        return result.ToString();
+        return string.IsNullOrWhiteSpace(sb.ToString()) ? "None" : sb.ToString();
     }
+
+    private static string FormatDefaultValue(object value)
+    {
+        return value switch
+        {
+            string s => $"\"{s}\"",
+            char c => $"'{c}'",
+            bool b => b.ToString().ToLower(),
+            _ => value.ToString()!
+        };
+    }
+
 }
 
-public record MethodParameter(string Type, string Name, string Description);
+public record MethodParameter(string Type, string Name, string Description, object? DefaultValue);

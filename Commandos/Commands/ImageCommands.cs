@@ -8,9 +8,16 @@ using NAudio.Wave;
 
 namespace Commandos.Commands;
 
+/// <summary>
+/// Bunch of image display functions.
+/// </summary>
 public static class ImageCommands
 {
-    private static bool _videoRan = false;
+    private static bool _videoRan;
+    /// <summary>
+    /// Draws an image to the console.
+    /// </summary>
+    /// <param name="path">Absolute path to the png or jpg file.</param>
     [Command("image", "photo", "displayphoto", "displayimage", "showimage", "loadimage")]
     public static void ShowImage(string path)
     {
@@ -86,6 +93,16 @@ public static class ImageCommands
             int.Parse(match.Groups[2].Value));
     }
     
+    /// <summary>
+    /// Plays a video in the console using shit I don't understand quite well.
+    /// It's a lot of operations with bytes and pointers to make it faster (~12 FPS).
+    /// I highly recommend downscaling videos to 12 FPS and letting it play at original FPS.
+    /// WARNING: This command can be used only ONCE in a single application run due to internal architecture of consoles.
+    /// It does some weirdy stuff with the way console renders text, and you can't reenter the state again.
+    /// </summary>
+    /// <param name="path">Absolute path to the video file.</param>
+    /// <param name="fps">FPS you wish the video to play at. Set to -1 for automatic FPS recognition (original from the file).
+    /// Disclaimer: This changes how many frames are attempted to be rendered per second, not how many actually are. Make it bigger than original FPS, speed up video. Make it smaller than original FPS, slow down video. The console can't achieve rendering speeds above 12 FPS.</param>
     [Command("video")]
     public static void PlayVideo(string path, int fps = -1)
     {
@@ -119,8 +136,11 @@ public static class ImageCommands
         int width = Math.Min(120, maxWidth);
         int height = Math.Min((int)(width / aspect / 2), maxHeight);
 
-        Console.SetWindowSize(width, height);
-        Console.SetBufferSize(width, height);
+        if (OperatingSystem.IsWindows())
+        {
+            Console.SetWindowSize(width, height);
+            Console.SetBufferSize(width, height);
+        }
 
         int consoleWidth = Console.WindowWidth;
         int consoleHeight = Console.WindowHeight * 2;
@@ -165,17 +185,17 @@ public static class ImageCommands
         };
         audioProcess.Start();
 
-        var waveFormat = new NAudio.Wave.WaveFormat(sampleRate, 16, channels);
-        var audioBuffer = new NAudio.Wave.BufferedWaveProvider(waveFormat)
+        var waveFormat = new WaveFormat(sampleRate, 16, channels);
+        var audioBuffer = new BufferedWaveProvider(waveFormat)
         {
             BufferLength = waveFormat.AverageBytesPerSecond * 2,
             DiscardOnBufferOverflow = true
         };
-        var audioOut = new NAudio.Wave.WaveOutEvent { DesiredLatency = 100 };
+        var audioOut = new WaveOutEvent { DesiredLatency = 100 };
         audioOut.Init(audioBuffer);
         audioOut.Play();
 
-        var frameTime = TimeSpan.FromMilliseconds((double)(1000.0 / fps));
+        var frameTime = TimeSpan.FromMilliseconds(1000.0 / fps);
 
         while (true)
         {
@@ -185,10 +205,8 @@ public static class ImageCommands
             if (read < frameBuffer.Length)
                 break;
 
-            // Render frame exactly like before
             RenderFrame(frameBuffer, consoleWidth, consoleHeight);
 
-            // Feed audio for this frame
             int totalRead = 0;
             while (totalRead < frameBytes)
             {
@@ -232,19 +250,15 @@ public static class ImageCommands
         p.Start();
         string output = p.StandardError.ReadToEnd();
         p.WaitForExit();
-
-        // Look for "fps" or "tbr" in the output
-        // Example line: Stream #0:0(eng): Video: h264 ... 30 fps, ...
+        
         var match = Regex.Match(output, @" (\d+(?:\.\d+)?) fps");
         if (match.Success && double.TryParse(match.Groups[1].Value, out double fps))
             return fps;
-
-        // fallback: look for tbr
+        
         match = Regex.Match(output, @" (\d+(?:\.\d+)?) tbr");
         if (match.Success && double.TryParse(match.Groups[1].Value, out double tbr))
             return tbr;
-
-        // default fallback
+        
         return 30.0;
     }
     
