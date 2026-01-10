@@ -5,15 +5,17 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using NAudio.Wave;
+using NAudio;
 
 namespace Commandos.Commands;
 
 /// <summary>
-/// Bunch of image display functions.
+/// Bunch of media display functions.
 /// </summary>
-public static class ImageCommands
+public static class MediaCommands
 {
     private static bool _videoRan;
+    private static string _ffmpegPath = @"assets\ffmpeg\ffmpeg.exe";
     /// <summary>
     /// Draws an image to the console.
     /// </summary>
@@ -77,7 +79,7 @@ public static class ImageCommands
         {
             StartInfo = new ProcessStartInfo
             {
-                FileName = "ffmpeg",
+                FileName = _ffmpegPath,
                 Arguments = $"-i \"{path}\"",
                 RedirectStandardError = true,
                 UseShellExecute = false
@@ -370,4 +372,19 @@ public static class ImageCommands
         return (audioProcess, output);
     }
 
+    [Command("audio", "music", "playsound", "audio", "playaudio", "playmusic")]
+    public static void PlayAudioCommand(string path)
+    {
+        WaveOutEvent outputDevice = new WaveOutEvent();
+
+        AudioFileReader audioFile = new AudioFileReader(path);
+
+        outputDevice.Init(audioFile);
+        outputDevice.PlaybackStopped += (_, __) =>
+        {
+            outputDevice.Dispose();
+            audioFile.Dispose();
+        };
+        outputDevice.Play();
+    }
 }

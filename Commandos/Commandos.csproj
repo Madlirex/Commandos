@@ -27,6 +27,13 @@
       <None Update="assets\Ratatouille.mp4">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Update="assets\ffmpeg\ffmpeg.exe">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="assets\ffmpeg\" />
     </ItemGroup>
 
 </Project>

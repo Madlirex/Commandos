@@ -27,6 +27,7 @@
             Each argument will be in a new line. To write a string with spaces use "".
             If the first argument is a valid integer number, the arguments after will be repeated that many times.
             </summary>
+            <param name="args">Messages to display.</param>
         </member>
         <member name="M:Commandos.Commands.BasicCommands.Add(System.Single[])">
             <summary>
@@ -53,19 +54,20 @@
             <summary>
             Waits for x seconds.
             </summary>
+            <param name="seconds">Amount of seconds to wait for.</param>
         </member>
-        <member name="T:Commandos.Commands.ImageCommands">
+        <member name="T:Commandos.Commands.MediaCommands">
             <summary>
-            Bunch of image display functions.
+            Bunch of media display functions.
             </summary>
         </member>
-        <member name="M:Commandos.Commands.ImageCommands.ShowImage(System.String)">
+        <member name="M:Commandos.Commands.MediaCommands.ShowImage(System.String)">
             <summary>
             Draws an image to the console.
             </summary>
             <param name="path">Absolute path to the png or jpg file.</param>
         </member>
-        <member name="M:Commandos.Commands.ImageCommands.PlayVideo(System.String,System.Int32)">
+        <member name="M:Commandos.Commands.MediaCommands.PlayVideo(System.String,System.Int32)">
             <summary>
             Plays a video in the console using shit I don't understand quite well.
             It's a lot of operations with bytes and pointers to make it faster (~12 FPS).

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Madlirex Studios")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.0.3")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.0.3+cf639761113506a9ffd949eed445eb19f35cf5a3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.0.3+7b85661a9109a96c35689b3317fc91847429ed93")]
 [assembly: System.Reflection.AssemblyProductAttribute("Commandos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Commandos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.0.3")]
